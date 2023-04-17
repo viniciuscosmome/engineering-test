@@ -1,3 +1,5 @@
+@import 'colors-scheme', 'functions';
+
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
 
 :root {
@@ -7,16 +9,19 @@
   --white-200:  #ccc;
   --white-100:  #fff;
   --black-100:  #000;
+  --green-200:  #32cf54;
   --green-100:  #47B960;
+  --red-200:    #c73939;
   --red-100:    #FF5151;
+  --blue-200:   #547cec;
   --blue-100:   #7695EC;
 
   --border-white-200: 1px solid var(--white-200);
-  --border-gray-100:  1px solid var(--gray-100);
   --border-gray-200:  1px solid var(--gray-200);
+  --border-gray-100:  1px solid var(--gray-100);
 
   --text:       var(--black-100);
-  --background: var(--gray-100);
+  --background: var(--white-300);
 }
 
 body, main, section,
@@ -25,7 +30,8 @@ h1, h2, h3, h4, h5, h6,
 div, span, strong, svg,
 path, small, img, figure,
 header, footer, ul, li, ol,
-select, label, em, b {
+select, label, em, b, article,
+aside, nav {
   &,
   &::before,
   &::after {
@@ -39,15 +45,21 @@ select, label, em, b {
 }
 
 a, button, input {
-  &,
-  &:hover,
+  text-decoration: none;
+  background: none;
+  outline: none;
+  border: none;
+  color: inherit;
+
+  transition: outline .1s;
+
   &:focus {
-    text-decoration: none;
-    background: none;
-    outline: none;
-    border: none;
-    color: inherit;
+    outline: .2rem solid var(--blue-200);
   }
+}
+
+a, button {
+  cursor: pointer;
 }
 
 body {

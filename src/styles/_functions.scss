@@ -1,0 +1,13 @@
+@each $name, $main-color, $main-background, $main-border, $hover-color, $hover-background, $hover-border in $buttons-color-scheme {
+  .button-#{$name} {
+    color: $main-color;
+    border-color: $main-border;
+    background-color: $main-background;
+
+    &:hover {
+      @if ($hover-color) { color: $hover-color; }
+      @if ($hover-border) { border-color: $hover-border; }
+      @if ($hover-background) { background-color: $hover-background; }
+    }
+  }
+}
