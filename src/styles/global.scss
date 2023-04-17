@@ -31,7 +31,7 @@ div, span, strong, svg,
 path, small, img, figure,
 header, footer, ul, li, ol,
 select, label, em, b, article,
-aside, nav {
+aside, nav, textarea {
   &,
   &::before,
   &::after {
@@ -44,7 +44,7 @@ aside, nav {
   }
 }
 
-a, button, input {
+a, button, input, textarea {
   text-decoration: none;
   background: none;
   outline: none;
@@ -68,4 +68,9 @@ body {
 
   transition-property: background-color, color;
   transition-duration: .2s;
+}
+
+.g-title {
+  font-weight: 700;
+  font-size: 1.38rem;
 }
