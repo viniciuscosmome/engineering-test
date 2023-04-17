@@ -9,7 +9,7 @@ const routes = createBrowserRouter([
     element: <AuthWrapper />,
     children: [
       {
-        path: 'login',
+        path: '/',
         element: <LoginPage />,
       }
     ]
