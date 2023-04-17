@@ -5,9 +5,9 @@ import { Button } from '../../components/partials';
 import styles from './login.module.scss';
 
 export function LoginPage() {
-  const [button, setButtonState] = useState<boolean>(true);
+  const [disableButton, setDisableButton] = useState<boolean>(true);
 
-  const changeButtonStatus = (status = false) => setButtonState(status);
+  const changeButtonState = (disable = false) => setDisableButton(disable);
 
   return (
     <Form title={'Welcome to CodeLeap network!'}>
@@ -16,11 +16,12 @@ export function LoginPage() {
         name={'usename'}
         placeholder={'John doe'}
         labelClass={styles.labelClass}
+        minLength={2}
+        changeButtonState={changeButtonState}
         required={true}
-        changeButtonStatus={changeButtonStatus}
       />
 
-      <Button type={'submit'} fit={'right'} disabled={button}>
+      <Button type={'submit'} fit={'right'} disabled={disableButton}>
         ENTER
       </Button>
     </Form>
