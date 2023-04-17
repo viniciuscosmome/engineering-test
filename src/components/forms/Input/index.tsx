@@ -23,7 +23,7 @@ const validators: iValidatorsProps = {
 export function Input(props: iInputProps) {
   const [message, setMessage] = useState<string>();
   const {
-    changeButtonStatus,
+    changeButtonState,
     label,
     type = 'text',
     name,
@@ -43,7 +43,7 @@ export function Input(props: iInputProps) {
     const { message } = validators[type](input);
 
     message && setMessage(message);
-    changeButtonStatus && changeButtonStatus(!!message);
+    changeButtonState && changeButtonState(!!message);
   };
 
   const onChange = (event: FormEvent<HTMLInputElement>) => {
