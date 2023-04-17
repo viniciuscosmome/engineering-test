@@ -8,10 +8,22 @@
   background-color: var(--white-100);
   border-radius: 1rem;
   border: var(--border-white-200);
+
+  transform-origin: top;
+  animation: grow .3s .1s both normal;
 }
 
 .title {
   margin-bottom: 1.5rem;
-  font-weight: 700;
-  font-size: 1.38rem;
+}
+
+@keyframes grow {
+  0% {
+    opacity: 0;
+    transform: scale(45%);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(100%);
+  }
 }
