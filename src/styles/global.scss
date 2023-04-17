@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+
+:root {
+  --gray-200:   #999;
+  --gray-100:   #777;
+  --white-300:  #ddd;
+  --white-200:  #ccc;
+  --white-100:  #fff;
+  --black-100:  #000;
+  --green-100:  #47B960;
+  --red-100:    #FF5151;
+  --blue-100:   #7695EC;
+
+  --border-white-200: 1px solid var(--white-200);
+  --border-gray-100:  1px solid var(--gray-100);
+  --border-gray-200:  1px solid var(--gray-200);
+
+  --text:       var(--black-100);
+  --background: var(--gray-100);
+}
+
+body, main, section,
+a, button, input, p, i,
+h1, h2, h3, h4, h5, h6,
+div, span, strong, svg,
+path, small, img, figure,
+header, footer, ul, li, ol,
+select, label, em, b {
+  &,
+  &::before,
+  &::after {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+a, button, input {
+  &,
+  &:hover,
+  &:focus {
+    text-decoration: none;
+    background: none;
+    outline: none;
+    border: none;
+    color: inherit;
+  }
+}
+
+body {
+  color: var(--text);
+  background-color: var(--background);
+
+  transition-property: background-color, color;
+  transition-duration: .2s;
+}
