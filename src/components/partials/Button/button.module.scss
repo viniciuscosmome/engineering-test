@@ -1,0 +1,33 @@
+.button {
+  padding: .5rem calc(2rem - 2px);
+  max-width: 100%;
+  font-weight: 700;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  border-radius: .5rem;
+  border: 1px solid transparent;
+
+  transition: background-color .3s;
+
+  &:disabled {
+    background-color: var(--gray-200);
+  }
+}
+
+.fit-right {
+  margin-left: auto;
+}
+
+.fit-left {
+  margin-right: auto;
+}
+
+.fit-center {
+  @extend .fit-right;
+  @extend .fit-left;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
