@@ -70,11 +70,11 @@ function Post() {
 
         <div className={styles.content}>
           <p className={styles.paragraph}>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium rem dolorem, maxime, fuga quisquam provident libero sit suscipit natus pariatur blanditiis quidem nisi tempora dicta cupiditate quibusdam incidunt id quo!
+            Curabitur suscipit suscipit tellus. Phasellus consectetuer vestibulum elit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Maecenas egestas arcu quis ligula mattis placerat. Duis vel nibh at velit scelerisque suscipit.
           </p>
 
           <p className={styles.paragraph}>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium rem dolorem, maxime, fuga quisquam provident libero sit suscipit natus pariatur blanditiis quidem nisi tempora dicta cupiditate quibusdam incidunt id quo!
+            Duis lobortis massa imperdiet quam. Aenean posuere, tortor sed cursus feugiat, nunc augue blandit nunc, eu sollicitudin urna dolor sagittis lacus. Fusce a quam. Nullam vel sem. Nullam cursus lacinia erat.
           </p>
         </div>
       </div>

@@ -1,12 +1,5 @@
 .g-anim-grow {
-  animation: grow .3s both;
-}
-
-@for $index from 1 through 10 {
-  .g-anim-grow:nth-of-type(#{$index}#{'n'}) {
-    --time: #{'.'}#{$index}#{'s'};
-    animation-delay: calc(var(--time) * 3);
-  }
+  animation: grow .3s .2s both;
 }
 
 @keyframes grow {
