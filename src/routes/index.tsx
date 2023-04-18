@@ -15,7 +15,7 @@ const routes = createBrowserRouter([
     ]
   },
   {
-    path: 'app',
+    path: '/feed',
     element: <AppWrapper />,
     children: [
       {
