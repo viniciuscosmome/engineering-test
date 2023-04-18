@@ -20,6 +20,8 @@
   --border-gray-200:  1px solid var(--gray-200);
   --border-gray-100:  1px solid var(--gray-100);
 
+  --border-radius-box: 1rem;
+
   --text:       var(--black-100);
   --background: var(--white-300);
 }
@@ -74,3 +76,5 @@ body {
   font-weight: 700;
   font-size: 1.38rem;
 }
+
+@import 'animations';
