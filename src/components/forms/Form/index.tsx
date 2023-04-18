@@ -7,6 +7,7 @@ export function Form(props: iFormProps) {
 
   stylesArr.push(styles.form);
   className && stylesArr.push(className);
+  stylesArr.push('g-anim-grow');
 
   const style = stylesArr.join(' ');
 

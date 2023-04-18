@@ -5,7 +5,7 @@ import styles from './input.module.scss';
 
 const validators: iValidatorsProps = {
   text(input) {
-    const { value, minLength = 0, required } = input;
+    const { value, minLength = 0, maxLength, required } = input;
     const response = {} as iValidatorsResponse;
     const { length = 0 } = value;
     const isEmpty = !length;
@@ -14,6 +14,8 @@ const validators: iValidatorsProps = {
       response.message = 'This field cannot be empty.';
     } else if (!isEmpty && length < minLength) {
       response.message = `Out of length. [min: ${minLength}]`;
+    } else if (maxLength && !isEmpty && length > maxLength) {
+      response.message = `Out of length. [max: ${maxLength}]`;
     }
 
     return response;
@@ -33,6 +35,7 @@ export function Input(props: iInputProps) {
     inputClass,
     required,
     minLength,
+    maxLength,
   } = props;
 
   const validateInput = (input: HTMLInputElement, type: string): void => {
@@ -64,6 +67,7 @@ export function Input(props: iInputProps) {
         placeholder={placeholder}
         className={`${styles.input} ${inputClass || ''}`}
         minLength={minLength}
+        maxLength={maxLength}
         required={required}
         onChange={onChange}
       />

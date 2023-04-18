@@ -5,7 +5,7 @@ import styles from './textarea.module.scss';
 
 const validators: iValidatorsProps = {
   textarea(textarea) {
-    const { value, minLength = 0, required } = textarea;
+    const { value, minLength = 0, maxLength, required } = textarea;
     const response = {} as iValidatorsResponse;
     const { length = 0 } = value;
     const isEmpty = !length;
@@ -14,6 +14,8 @@ const validators: iValidatorsProps = {
       response.message = 'This field cannot be empty.';
     } else if (!isEmpty && length < minLength) {
       response.message = `Out of length. [min: ${minLength}]`;
+    } else if (maxLength && !isEmpty && length > maxLength) {
+      response.message = `Out of length. [max: ${maxLength}]`;
     }
 
     return response;
@@ -27,6 +29,7 @@ export function Textarea(props: iTextareaProps) {
     name,
     placeholder,
     minLength,
+    maxLength,
     labelClass,
     titleClass,
     textareaClass,
@@ -62,6 +65,7 @@ export function Textarea(props: iTextareaProps) {
         placeholder={placeholder}
         className={`${styles.textarea} ${textareaClass || ''}`}
         minLength={minLength}
+        maxLength={maxLength}
         required={required}
         onChange={onChange}
       />
