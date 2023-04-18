@@ -5,7 +5,7 @@ import { Button } from '../../components/partials';
 import { IcDeleteForever, IcEdit } from '../../components/icons';
 import styles from './feed.module.scss';
 
-function FormContent() {
+export function FormPost() {
   const [disableButtonByTitle, setDisableButtonByTitle] = useState<boolean>(true);
   const [disableButtonByText, setDisableButtonByText] = useState<boolean>(true);
   const disableButton = (disableButtonByTitle || disableButtonByText);
@@ -86,7 +86,7 @@ export function FeedPage() {
   return (
     <>
       <section className={styles.section}>
-        <FormContent />
+        <FormPost />
       </section>
 
       <section className={styles.section}>
