@@ -23,12 +23,12 @@ const validators: iValidatorsProps = {
 };
 
 export function Input(props: iInputProps) {
-  const [message, setMessage] = useState<string>();
   const {
     changeButtonState,
     label,
     type = 'text',
     name,
+    value,
     placeholder,
     labelClass,
     titleClass,
@@ -37,6 +37,8 @@ export function Input(props: iInputProps) {
     minLength,
     maxLength,
   } = props;
+  const [message, setMessage] = useState<string>();
+  const [inputValue, setInputValue] = useState<string>(value as string);
 
   const validateInput = (input: HTMLInputElement, type: string): void => {
     setMessage('');
@@ -52,6 +54,7 @@ export function Input(props: iInputProps) {
   const onChange = (event: FormEvent<HTMLInputElement>) => {
     const input = event.target as HTMLInputElement;
 
+    setInputValue(input.value);
     validateInput(input, type);
   };
 
@@ -70,6 +73,7 @@ export function Input(props: iInputProps) {
         maxLength={maxLength}
         required={required}
         onChange={onChange}
+        value={inputValue}
       />
 
       <div className={styles.message} data-display-error={message || ''}></div>

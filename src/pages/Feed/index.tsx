@@ -1,11 +1,12 @@
 import { useState } from 'react';
 
+import type { iFormPost } from './feed';
 import { Form, Input, Textarea } from '../../components/forms';
 import { Button } from '../../components/partials';
 import { IcDeleteForever, IcEdit } from '../../components/icons';
 import styles from './feed.module.scss';
 
-export function FormPost() {
+export function FormPost({title, content}: iFormPost) {
   const [disableButtonByTitle, setDisableButtonByTitle] = useState<boolean>(true);
   const [disableButtonByText, setDisableButtonByText] = useState<boolean>(true);
   const disableButton = (disableButtonByTitle || disableButtonByText);
@@ -21,6 +22,7 @@ export function FormPost() {
         labelClass={styles.label}
         minLength={2}
         maxLength={200}
+        value={title}
         changeButtonState={changeButtonStateByTitle}
         required={true}
       />
@@ -31,6 +33,7 @@ export function FormPost() {
         labelClass={styles.label}
         minLength={2}
         maxLength={3000}
+        value={content}
         changeButtonState={changeButtonStateByText}
         required={true}
       />

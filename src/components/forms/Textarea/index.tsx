@@ -23,10 +23,10 @@ const validators: iValidatorsProps = {
 };
 
 export function Textarea(props: iTextareaProps) {
-  const [message, setMessage] = useState<string>();
   const {
     label,
     name,
+    value,
     placeholder,
     minLength,
     maxLength,
@@ -36,6 +36,8 @@ export function Textarea(props: iTextareaProps) {
     required,
     changeButtonState
   } = props;
+  const [message, setMessage] = useState<string>();
+  const [textareaValue, setTextareaValue] = useState<string>(value as string);
 
   const validateInput = (textarea: HTMLTextAreaElement, type: string): void => {
     setMessage('');
@@ -51,6 +53,7 @@ export function Textarea(props: iTextareaProps) {
   const onChange = (event: FormEvent<HTMLTextAreaElement>) => {
     const textarea = event.target as HTMLTextAreaElement;
 
+    setTextareaValue(textarea.value);
     validateInput(textarea, 'textarea');
   };
 
@@ -68,6 +71,7 @@ export function Textarea(props: iTextareaProps) {
         maxLength={maxLength}
         required={required}
         onChange={onChange}
+        value={textareaValue}
       />
 
       <div className={styles.message} data-display-error={message || ''}></div>
