@@ -20,6 +20,8 @@
   --border-gray-200:  1px solid var(--gray-200);
   --border-gray-100:  1px solid var(--gray-100);
 
+  --border-radius-box: 1rem;
+
   --text:       var(--black-100);
   --background: var(--white-300);
 }
@@ -31,7 +33,7 @@ div, span, strong, svg,
 path, small, img, figure,
 header, footer, ul, li, ol,
 select, label, em, b, article,
-aside, nav {
+aside, nav, textarea {
   &,
   &::before,
   &::after {
@@ -44,7 +46,7 @@ aside, nav {
   }
 }
 
-a, button, input {
+a, button, input, textarea {
   text-decoration: none;
   background: none;
   outline: none;
@@ -69,3 +71,10 @@ body {
   transition-property: background-color, color;
   transition-duration: .2s;
 }
+
+.g-title {
+  font-weight: 700;
+  font-size: 1.38rem;
+}
+
+@import 'animations';

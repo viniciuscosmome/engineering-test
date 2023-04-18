@@ -1,0 +1,40 @@
+.label {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+
+.title {
+  font-size: 1rem;
+}
+
+.textarea {
+  padding: .5rem calc(1rem - 3px);
+  width: 100%;
+  min-height: 74px;
+  background-color: var(--white-100);
+  border: var(--border-gray-100);
+  border-radius: .5rem;
+  resize: none;
+
+  &::placeholder {
+    color: var(--white-200);
+    font-size: calc(1rem - 2px);
+  }
+}
+
+.message {
+  display: block;
+  color: var(--red-100);
+  font-weight: 600;
+  font-size: small;
+
+  &::before {
+    content: attr(data-display-error);
+  }
+
+  &[data-display-error=""] {
+    display: none;
+  }
+}

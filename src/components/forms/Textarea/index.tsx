@@ -1,11 +1,11 @@
 import { FormEvent, useState } from 'react';
 
-import type { iInputProps, iValidatorsProps, iValidatorsResponse } from './input';
-import styles from './input.module.scss';
+import type { iTextareaProps, iValidatorsProps, iValidatorsResponse } from './textarea';
+import styles from './textarea.module.scss';
 
 const validators: iValidatorsProps = {
-  text(input) {
-    const { value, minLength = 0, maxLength, required } = input;
+  textarea(textarea) {
+    const { value, minLength = 0, maxLength, required } = textarea;
     const response = {} as iValidatorsResponse;
     const { length = 0 } = value;
     const isEmpty = !length;
@@ -22,40 +22,39 @@ const validators: iValidatorsProps = {
   },
 };
 
-export function Input(props: iInputProps) {
+export function Textarea(props: iTextareaProps) {
   const {
-    changeButtonState,
     label,
-    type = 'text',
     name,
     value,
     placeholder,
-    labelClass,
-    titleClass,
-    inputClass,
-    required,
     minLength,
     maxLength,
+    labelClass,
+    titleClass,
+    textareaClass,
+    required,
+    changeButtonState
   } = props;
   const [message, setMessage] = useState<string>();
-  const [inputValue, setInputValue] = useState<string>(value as string);
+  const [textareaValue, setTextareaValue] = useState<string>(value as string);
 
-  const validateInput = (input: HTMLInputElement, type: string): void => {
+  const validateInput = (textarea: HTMLTextAreaElement, type: string): void => {
     setMessage('');
 
     if (!validators[type]) return;
 
-    const { message } = validators[type](input);
+    const { message } = validators[type](textarea);
 
     message && setMessage(message);
     changeButtonState && changeButtonState(!!message);
   };
 
-  const onChange = (event: FormEvent<HTMLInputElement>) => {
-    const input = event.target as HTMLInputElement;
+  const onChange = (event: FormEvent<HTMLTextAreaElement>) => {
+    const textarea = event.target as HTMLTextAreaElement;
 
-    setInputValue(input.value);
-    validateInput(input, type);
+    setTextareaValue(textarea.value);
+    validateInput(textarea, 'textarea');
   };
 
   return (
@@ -64,16 +63,15 @@ export function Input(props: iInputProps) {
         {label}
       </div>
 
-      <input
-        type={type}
+      <textarea
         name={name}
         placeholder={placeholder}
-        className={`${styles.input} ${inputClass || ''}`}
+        className={`${styles.textarea} ${textareaClass || ''}`}
         minLength={minLength}
         maxLength={maxLength}
         required={required}
         onChange={onChange}
-        value={inputValue}
+        value={textareaValue}
       />
 
       <div className={styles.message} data-display-error={message || ''}></div>

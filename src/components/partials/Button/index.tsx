@@ -8,7 +8,8 @@ export function Button(props: iButtonProps) {
     fit,
     uppercase,
     disabled = false,
-    color = 'blue'
+    color = 'blue',
+    className,
   } = props;
   const stylesArr = [];
 
@@ -17,6 +18,7 @@ export function Button(props: iButtonProps) {
   fit && stylesArr.push(styles[`fit-${fit}`]);
   uppercase && stylesArr.push(styles.uppercase);
   color && stylesArr.push(`button-${color}`);
+  className && stylesArr.push(className);
 
   const style = stylesArr.join(' ');
 

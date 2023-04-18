@@ -5,7 +5,7 @@ export interface iInputProps extends InputHTMLAttributes<HTMLInputElement> {
   labelClass?: string;
   titleClass?: string;
   inputClass?: string;
-  changeButtonStatus?: (status?: boolean) => void;
+  changeButtonState?: (disable?: boolean) => void;
 }
 
 export interface iValidatorsResponse {

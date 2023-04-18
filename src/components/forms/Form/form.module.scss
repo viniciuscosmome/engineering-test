@@ -6,12 +6,10 @@
   max-width: calc(95% - 3rem);
   width: 500px;
   background-color: var(--white-100);
-  border-radius: 1rem;
+  border-radius: var(--border-radius-box);
   border: var(--border-white-200);
 }
 
 .title {
   margin-bottom: 1.5rem;
-  font-weight: 700;
-  font-size: 1.38rem;
 }
