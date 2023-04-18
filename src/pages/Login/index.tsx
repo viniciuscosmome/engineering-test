@@ -17,6 +17,7 @@ export function LoginPage() {
         placeholder={'John doe'}
         labelClass={styles.labelClass}
         minLength={2}
+        maxLength={200}
         changeButtonState={changeButtonState}
         required={true}
       />
