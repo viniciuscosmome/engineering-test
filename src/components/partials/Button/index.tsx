@@ -17,7 +17,7 @@ export function Button(props: iButtonProps) {
 
   fit && stylesArr.push(styles[`fit-${fit}`]);
   uppercase && stylesArr.push(styles.uppercase);
-  color && stylesArr.push(`button-${color}`);
+  color && stylesArr.push(`g-button-${color}`);
   className && stylesArr.push(className);
 
   const style = stylesArr.join(' ');
