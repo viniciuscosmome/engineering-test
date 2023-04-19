@@ -1,5 +1,5 @@
 @each $name, $main-color, $main-background, $main-border, $hover-color, $hover-background, $hover-border in $buttons-color-scheme {
-  .button-#{$name} {
+  .g-button-#{$name} {
     color: $main-color;
     border-color: $main-border;
     background-color: $main-background;
