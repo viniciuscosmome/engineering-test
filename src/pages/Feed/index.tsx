@@ -54,11 +54,11 @@ function Post() {
         </h2>
 
         <button title={'Delete'} className={styles.action}>
-          <IcDeleteForever size={'1.5rem'} />
+          <IcDeleteForever size={'2rem'} />
         </button>
 
         <button title={'Edit'} className={styles.action}>
-          <IcEdit size={'1.5rem'} />
+          <IcEdit size={'2rem'} />
         </button>
       </div>
 
