@@ -1,0 +1,28 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  background-color: var(--white-100);
+  border: var(--border-gray-200);
+  border-radius: var(--border-radius-box);
+}
+
+.paragraph {
+  font-size: 1.12rem;
+}
+
+.inlineButtons {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.button {
+  padding: .5rem 2.45rem;
+}
+
+.buttonCancel {
+  border-color: var(--gray-200);
+}

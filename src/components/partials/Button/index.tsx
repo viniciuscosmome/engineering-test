@@ -10,6 +10,7 @@ export function Button(props: iButtonProps) {
     disabled = false,
     color = 'blue',
     className,
+    onClick,
   } = props;
   const stylesArr = [];
 
@@ -23,7 +24,7 @@ export function Button(props: iButtonProps) {
   const style = stylesArr.join(' ');
 
   return (
-    <button type={type} className={style} disabled={disabled}>
+    <button type={type} className={style} disabled={disabled} onClick={onClick}>
       {children}
     </button>
   );
