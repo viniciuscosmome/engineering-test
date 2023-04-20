@@ -78,3 +78,10 @@
   flex-direction: column;
   gap: 1rem;
 }
+
+.inlineButtons {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1rem;
+}
