@@ -1,0 +1,30 @@
+.container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1050;
+  padding: 1rem;
+  max-height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background-color: var(--modal-background);
+}
+
+.container,
+.overlay {
+  top: 0;
+  left: 0;
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.overlay {
+  position: absolute;
+}
+
+.content {
+  margin: auto;
+  max-width: 100%;
+  width: 660px;
+}
