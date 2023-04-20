@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, FormEvent } from 'react';
 
 import { Form, Input } from '../../components/forms';
 import { Button } from '../../components/partials';
@@ -9,8 +9,16 @@ export function LoginPage() {
 
   const changeButtonState = (disable = false) => setDisableButton(disable);
 
+  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const form = event.target as HTMLFormElement;
+    const formData = Object.fromEntries(new FormData(form));
+
+    console.log(formData);
+  };
+
   return (
-    <Form title={'Welcome to CodeLeap network!'}>
+    <Form title={'Welcome to CodeLeap network!'} onSubmit={onSubmit}>
       <Input
         label={'Please enter your username'}
         name={'usename'}
