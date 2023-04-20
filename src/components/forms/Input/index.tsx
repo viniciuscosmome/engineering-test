@@ -38,7 +38,7 @@ export function Input(props: iInputProps) {
     maxLength,
   } = props;
   const [message, setMessage] = useState<string>();
-  const [inputValue, setInputValue] = useState<string>(value as string);
+  const [inputValue, setInputValue] = useState<string>((value || '') as string);
 
   const validateInput = (input: HTMLInputElement, type: string): void => {
     setMessage('');
