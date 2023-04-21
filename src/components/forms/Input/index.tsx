@@ -1,26 +1,8 @@
 import { FormEvent, useState } from 'react';
 
-import type { iInputProps, iValidatorsProps, iValidatorsResponse } from './input';
+import type { iInputProps } from './input';
 import styles from './input.module.scss';
-
-const validators: iValidatorsProps = {
-  text(input) {
-    const { value, minLength = 0, maxLength, required } = input;
-    const response = {} as iValidatorsResponse;
-    const { length = 0 } = value;
-    const isEmpty = !length;
-
-    if (required && isEmpty) {
-      response.message = 'This field cannot be empty.';
-    } else if (!isEmpty && length < minLength) {
-      response.message = `Out of length. [min: ${minLength}]`;
-    } else if (maxLength && !isEmpty && length > maxLength) {
-      response.message = `Out of length. [max: ${maxLength}]`;
-    }
-
-    return response;
-  },
-};
+import validators from '../../../helpers/validate';
 
 export function Input(props: iInputProps) {
   const {
@@ -38,17 +20,16 @@ export function Input(props: iInputProps) {
     maxLength,
   } = props;
   const [message, setMessage] = useState<string>();
-  const [inputValue, setInputValue] = useState<string>(value as string);
+  const [inputValue, setInputValue] = useState<string>((value || '') as string);
+  const initialValue = value;
 
   const validateInput = (input: HTMLInputElement, type: string): void => {
     setMessage('');
 
-    if (!validators[type]) return;
+    const { error, message } = validators.text(input, initialValue as string);
 
-    const { message } = validators[type](input);
-
-    message && setMessage(message);
-    changeButtonState && changeButtonState(!!message);
+    error && setMessage(message);
+    changeButtonState && changeButtonState(error);
   };
 
   const onChange = (event: FormEvent<HTMLInputElement>) => {

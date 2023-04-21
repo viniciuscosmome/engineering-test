@@ -2,7 +2,7 @@ import type { iFormProps } from './form';
 import styles from './form.module.scss';
 
 export function Form(props: iFormProps) {
-  const { title, children, className } = props;
+  const { title, children, className, onSubmit } = props;
   const stylesArr = [];
 
   stylesArr.push(styles.form);
@@ -12,7 +12,7 @@ export function Form(props: iFormProps) {
   const style = stylesArr.join(' ');
 
   return (
-    <form className={style}>
+    <form className={style} onSubmit={onSubmit}>
       <h2 className={`${styles.title} g-title`}>
         {title}
       </h2>

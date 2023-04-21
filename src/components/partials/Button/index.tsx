@@ -10,6 +10,7 @@ export function Button(props: iButtonProps) {
     disabled = false,
     color = 'blue',
     className,
+    onClick,
   } = props;
   const stylesArr = [];
 
@@ -17,13 +18,13 @@ export function Button(props: iButtonProps) {
 
   fit && stylesArr.push(styles[`fit-${fit}`]);
   uppercase && stylesArr.push(styles.uppercase);
-  color && stylesArr.push(`button-${color}`);
+  color && stylesArr.push(`g-button-${color}`);
   className && stylesArr.push(className);
 
   const style = stylesArr.join(' ');
 
   return (
-    <button type={type} className={style} disabled={disabled}>
+    <button type={type} className={style} disabled={disabled} onClick={onClick}>
       {children}
     </button>
   );

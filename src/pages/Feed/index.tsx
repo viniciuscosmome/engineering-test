@@ -1,22 +1,42 @@
-import { useState } from 'react';
+import { FormEvent, useState } from 'react';
 
-import type { iFormPost } from './feed';
+import type { iFormPostProps, iPostProps } from './feed';
+import { ModalWrapper } from '../../components/wrappers';
 import { Form, Input, Textarea } from '../../components/forms';
-import { Button } from '../../components/partials';
+import { Button, ConfirmAction } from '../../components/partials';
 import { IcDeleteForever, IcEdit } from '../../components/icons';
 import styles from './feed.module.scss';
 
-export function FormPost({title, content}: iFormPost) {
+function FormPost(props: iFormPostProps) {
   const [disableButtonByTitle, setDisableButtonByTitle] = useState<boolean>(true);
   const [disableButtonByText, setDisableButtonByText] = useState<boolean>(true);
-  const disableButton = (disableButtonByTitle || disableButtonByText);
+  const {id, title, content, onCancel} = props;
+  const initialData: Partial<iPostProps> = {id, title, content};
+  const isEditMode = !!id;
+  const disableButton = isEditMode ? (disableButtonByTitle && disableButtonByText) : (disableButtonByTitle || disableButtonByText);
 
   const changeButtonStateByTitle = (disable = false) => setDisableButtonByTitle(disable);
   const changeButtonStateByText = (disable = false) => setDisableButtonByText(disable);
 
+  const primaryAction = isEditMode ? 'Save' : 'Create';
+  const primaryColor = isEditMode ? 'green' : 'blue';
+
+  const onSubmit = (event: FormEvent<HTMLFormElement>): void => {
+    event.preventDefault();
+    const form = event.target as HTMLFormElement;
+    const formData = Object.fromEntries(new FormData(form));
+
+    if (initialData.id) {
+      console.log('Edit post');
+    } else {
+      console.log('New post');
+    }
+  };
+
   return (
-    <Form title={'What\'s on your mind?'} className={styles.form}>
+    <Form title={'What\'s on your mind?'} className={styles.form} onSubmit={onSubmit}>
       <Input
+        name={'post_title'}
         label={'Title'}
         placeholder={'Hello world'}
         labelClass={styles.label}
@@ -28,6 +48,7 @@ export function FormPost({title, content}: iFormPost) {
       />
 
       <Textarea
+        name={'post_content'}
         label={'Content'}
         placeholder={'Content here'}
         labelClass={styles.label}
@@ -38,50 +59,123 @@ export function FormPost({title, content}: iFormPost) {
         required={true}
       />
 
-      <Button type={'submit'} fit={'right'} disabled={disableButton} className={styles.submit}>
-        Create
-      </Button>
+      <div className={styles.inlineButtons}>
+        {isEditMode && (
+          <Button
+            type={'button'}
+            className={styles.submit}
+            color={'white'}
+            onClick={onCancel}
+          >
+            Cancel
+          </Button>
+        )}
+
+        <Button
+          type={'submit'}
+          className={styles.submit}
+          color={primaryColor}
+          disabled={disableButton}
+        >
+          {primaryAction}
+        </Button>
+      </div>
     </Form>
   );
 }
 
 function Post() {
+  const [openEditModal, setOpenEditModal] = useState(false);
+  const [openConfirmModal, setOpenConfirmModal] = useState(false);
+  const {id, username, createdAt, title, content} = {
+    id: 'random-id',
+    username: 'random-username',
+    createdAt: Date.now(),
+    title: 'post title',
+    content: 'Curabitur suscipit suscipit tellus. Phasellus consectetuer vestibulum elit.'
+  };
+  const [idToDelete, setIdToDelete] = useState<string | null>(null);
+
+  const toggleScrollState = (): void => {
+    const bodyStyle = document.body.style;
+    bodyStyle.overflow = (bodyStyle.overflow === 'hidden') ? 'auto' : 'hidden';
+  };
+
+  const changeEditModalState = (): void => {
+    const isOpenEditModal = !openEditModal;
+    setOpenEditModal(isOpenEditModal);
+    toggleScrollState();
+  };
+
+  const changeConfirmModalState = (): void => {
+    const isOpenConfirmModal = !openConfirmModal;
+    setOpenConfirmModal(isOpenConfirmModal);
+    toggleScrollState();
+
+    setIdToDelete(idToDelete ? null : id);
+  };
+
+  const onConfirmAction = (): void => {
+    changeConfirmModalState();
+  };
+
   return (
-    <article className={`${styles.post} g-anim-grow`}>
-      <div className={styles.header}>
-        <h2 className={`${styles.title} g-title`}>
-          My First Post at CodeLeap Network!
-        </h2>
+    <>
+      {openEditModal && (
+        <ModalWrapper changeModalState={changeEditModalState}>
+          <FormPost id={id} title={title} content={content} onCancel={changeEditModalState} />
+        </ModalWrapper>
+      )}
 
-        <button title={'Delete'} className={styles.action}>
-          <IcDeleteForever size={'1.5rem'} />
-        </button>
+      {openConfirmModal && (
+        <ModalWrapper changeModalState={changeConfirmModalState}>
+          <ConfirmAction
+            onCancel={changeConfirmModalState}
+            onConfirm={onConfirmAction}
+          />
+        </ModalWrapper>
+      )}
 
-        <button title={'Edit'} className={styles.action}>
-          <IcEdit size={'1.5rem'} />
-        </button>
-      </div>
+      <article className={`${styles.post} g-anim-grow`}>
+        <div className={styles.header}>
+          <h2 className={`${styles.title} g-title`}>
+            {title}
+          </h2>
 
-      <div className={styles.body}>
-        <div className={styles.username}>
-          @Victor
+          <button
+            title={'Delete'}
+            className={styles.action}
+            onClick={changeConfirmModalState}
+          >
+            <IcDeleteForever size={'2rem'} />
+          </button>
+
+          <button
+            title={'Edit'}
+            className={styles.action}
+            onClick={changeEditModalState}
+          >
+            <IcEdit size={'2rem'} />
+          </button>
         </div>
 
-        <div className={styles.timestamp}>
-          25 minutes ago
-        </div>
+        <div className={styles.body}>
+          <div className={styles.username}>
+            {username}
+          </div>
 
-        <div className={styles.content}>
-          <p className={styles.paragraph}>
-            Curabitur suscipit suscipit tellus. Phasellus consectetuer vestibulum elit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Maecenas egestas arcu quis ligula mattis placerat. Duis vel nibh at velit scelerisque suscipit.
-          </p>
+          <div className={styles.timestamp}>
+            {createdAt}
+          </div>
 
-          <p className={styles.paragraph}>
-            Duis lobortis massa imperdiet quam. Aenean posuere, tortor sed cursus feugiat, nunc augue blandit nunc, eu sollicitudin urna dolor sagittis lacus. Fusce a quam. Nullam vel sem. Nullam cursus lacinia erat.
-          </p>
+          <div className={styles.content}>
+            <p className={styles.paragraph}>
+              {content}
+            </p>
+          </div>
         </div>
-      </div>
-    </article>
+      </article>
+    </>
   );
 }
 

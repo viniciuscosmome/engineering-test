@@ -6,11 +6,12 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   border-radius: .5rem;
-  border: 1px solid transparent;
+  border: 1px solid;
 
   transition: background-color .3s;
 
   &:disabled {
+    border-color: var(--gray-200);
     background-color: var(--gray-200);
   }
 }
