@@ -1,26 +1,8 @@
 import { FormEvent, useState } from 'react';
 
-import type { iTextareaProps, iValidatorsProps, iValidatorsResponse } from './textarea';
+import type { iTextareaProps } from './textarea';
 import styles from './textarea.module.scss';
-
-const validators: iValidatorsProps = {
-  textarea(textarea) {
-    const { value, minLength = 0, maxLength, required } = textarea;
-    const response = {} as iValidatorsResponse;
-    const { length = 0 } = value;
-    const isEmpty = !length;
-
-    if (required && isEmpty) {
-      response.message = 'This field cannot be empty.';
-    } else if (!isEmpty && length < minLength) {
-      response.message = `Out of length. [min: ${minLength}]`;
-    } else if (maxLength && !isEmpty && length > maxLength) {
-      response.message = `Out of length. [max: ${maxLength}]`;
-    }
-
-    return response;
-  },
-};
+import validators from '../../../helpers/validate';
 
 export function Textarea(props: iTextareaProps) {
   const {
@@ -38,16 +20,15 @@ export function Textarea(props: iTextareaProps) {
   } = props;
   const [message, setMessage] = useState<string>();
   const [textareaValue, setTextareaValue] = useState<string>(value as string);
+  const initialValue = value;
 
   const validateInput = (textarea: HTMLTextAreaElement, type: string): void => {
     setMessage('');
 
-    if (!validators[type]) return;
+    const { error, message } = validators.text(textarea, initialValue as string);
 
-    const { message } = validators[type](textarea);
-
-    message && setMessage(message);
-    changeButtonState && changeButtonState(!!message);
+    error && setMessage(message);
+    changeButtonState && changeButtonState(error);
   };
 
   const onChange = (event: FormEvent<HTMLTextAreaElement>) => {
