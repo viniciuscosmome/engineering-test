@@ -8,13 +8,12 @@ import { IcDeleteForever, IcEdit } from '../../components/icons';
 import styles from './feed.module.scss';
 
 function FormPost(props: iFormPostProps) {
+  const [disableButtonByTitle, setDisableButtonByTitle] = useState<boolean>(true);
+  const [disableButtonByText, setDisableButtonByText] = useState<boolean>(true);
   const {id, title, content, onCancel} = props;
   const initialData: Partial<iPostProps> = {id, title, content};
-  const noDisableIfContentExist = !(!!id && !!title);
-  const [disableButtonByTitle, setDisableButtonByTitle] = useState<boolean>(noDisableIfContentExist);
-  const [disableButtonByText, setDisableButtonByText] = useState<boolean>(noDisableIfContentExist);
-  const disableButton = (disableButtonByTitle || disableButtonByText);
   const isEditMode = !!id;
+  const disableButton = isEditMode ? (disableButtonByTitle && disableButtonByText) : (disableButtonByTitle || disableButtonByText);
 
   const changeButtonStateByTitle = (disable = false) => setDisableButtonByTitle(disable);
   const changeButtonStateByText = (disable = false) => setDisableButtonByText(disable);
@@ -28,16 +27,9 @@ function FormPost(props: iFormPostProps) {
     const formData = Object.fromEntries(new FormData(form));
 
     if (initialData.id) {
-      console.log(`
-        editMode
-        initial data: ${initialData},
-        current formData: ${formData},
-      `);
+      console.log('Edit post');
     } else {
-      console.log(`
-        default
-        current formData: ${formData},
-      `);
+      console.log('New post');
     }
   };
 
