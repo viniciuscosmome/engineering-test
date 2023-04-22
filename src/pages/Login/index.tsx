@@ -1,7 +1,7 @@
 import { useState, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { login } from '../../actions/user.slice';
+import { login } from '../../actions/user';
 import { useAppDispatch } from '../../redux/hooks';
 
 import { Form, Input } from '../../components/forms';
