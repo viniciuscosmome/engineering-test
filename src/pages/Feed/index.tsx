@@ -27,9 +27,9 @@ function FormPost(props: iFormPostProps) {
     const formData = Object.fromEntries(new FormData(form));
 
     if (initialData.id) {
-      console.log('Edit post');
+      console.log('Edit post', formData);
     } else {
-      console.log('New post');
+      console.log('New post', formData);
     }
   };
 
