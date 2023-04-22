@@ -1,7 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
 
 import { AuthWrapper, AppWrapper } from '../components/wrappers';
-import { FeedPage, LoginPage } from '../pages';
+import { ProtectedRoute, FeedPage, LoginPage } from '../pages';
 
 const routes = createBrowserRouter([
   {
@@ -16,11 +16,17 @@ const routes = createBrowserRouter([
   },
   {
     path: '/feed',
-    element: <AppWrapper />,
+    element: <ProtectedRoute />,
     children: [
       {
         path: '',
-        element: <FeedPage />,
+        element: <AppWrapper />,
+        children: [
+          {
+            path: '',
+            element: <FeedPage />,
+          }
+        ]
       }
     ]
   },
