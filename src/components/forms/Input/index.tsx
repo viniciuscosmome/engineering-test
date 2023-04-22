@@ -23,7 +23,7 @@ export function Input(props: iInputProps) {
   const [inputValue, setInputValue] = useState<string>((value || '') as string);
   const initialValue = value;
 
-  const validateInput = (input: HTMLInputElement, type: string): void => {
+  const validateInput = (input: HTMLInputElement): void => {
     setMessage('');
 
     const { error, message } = validators.text(input, initialValue as string);
@@ -36,7 +36,7 @@ export function Input(props: iInputProps) {
     const input = event.target as HTMLInputElement;
 
     setInputValue(input.value);
-    validateInput(input, type);
+    validateInput(input);
   };
 
   return (

@@ -22,7 +22,7 @@ export function Textarea(props: iTextareaProps) {
   const [textareaValue, setTextareaValue] = useState<string>(value as string);
   const initialValue = value;
 
-  const validateInput = (textarea: HTMLTextAreaElement, type: string): void => {
+  const validateInput = (textarea: HTMLTextAreaElement): void => {
     setMessage('');
 
     const { error, message } = validators.text(textarea, initialValue as string);
@@ -35,7 +35,7 @@ export function Textarea(props: iTextareaProps) {
     const textarea = event.target as HTMLTextAreaElement;
 
     setTextareaValue(textarea.value);
-    validateInput(textarea, 'textarea');
+    validateInput(textarea);
   };
 
   return (
