@@ -1,4 +1,3 @@
-import type { iFormProps } from './form';
 import styles from './form.module.scss';
 
 export function Form(props: iFormProps) {

@@ -1,13 +1,12 @@
 import { useState } from 'react';
 
-import type { iPostProps } from './post';
 import { FormPost } from '../';
 import { ModalWrapper } from '../../components/wrappers';
 import { IcDeleteForever, IcEdit } from '../../components/icons';
 import { ConfirmAction } from '../../components/partials';
 import styles from './post.module.scss';
 
-export function Post(props: iPostProps) {
+export function Post(props: iPostState) {
   const [openEditModal, setOpenEditModal] = useState(false);
   const [openConfirmModal, setOpenConfirmModal] = useState(false);
   const {id, username, title, content, created_datetime} = props;

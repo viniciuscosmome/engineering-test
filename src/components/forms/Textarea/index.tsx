@@ -1,6 +1,5 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, useRef, useState } from 'react';
 
-import type { iTextareaProps } from './textarea';
 import styles from './textarea.module.scss';
 import validators from '../../../helpers/validate';
 
@@ -18,16 +17,27 @@ export function Textarea(props: iTextareaProps) {
     required,
     changeButtonState
   } = props;
+  const textareaRef = useRef<HTMLTextAreaElement | null>(null);
   const [message, setMessage] = useState<string>();
   const [textareaValue, setTextareaValue] = useState<string>(value as string);
   const initialValue = value;
 
+  const setNameAtt = (att: string) => {
+    const textarea = textareaRef.current as HTMLTextAreaElement;
+    textarea.name = att;
+  };
+
   const validateInput = (textarea: HTMLTextAreaElement): void => {
     setMessage('');
+    setNameAtt(name || '');
 
     const { error, message } = validators.text(textarea, initialValue as string);
 
-    error && setMessage(message);
+    if (error !== 'none') {
+      setMessage(message);
+      setNameAtt('');
+    }
+
     changeButtonState && changeButtonState(error);
   };
 
@@ -45,7 +55,8 @@ export function Textarea(props: iTextareaProps) {
       </div>
 
       <textarea
-        name={name}
+        ref={textareaRef}
+        name={''}
         placeholder={placeholder}
         className={`${styles.textarea} ${textareaClass || ''}`}
         minLength={minLength}

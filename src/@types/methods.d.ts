@@ -1,11 +1,11 @@
-export interface iValidatorsResponse {
-  error: boolean;
+declare interface iValidatorsResponse {
+  error: 'error' | 'warn' | 'none';
   message: string;
 }
 
 type iTextInputTypes = HTMLInputElement | HTMLTextAreaElement;
 
-export interface iValidatorsProps {
+declare interface iValidatorsProps {
   [key: string]: (param: iTextInputTypes, initial?: string) => iValidatorsResponse;
   text: (element: iTextInputTypes, initial?: string) => iValidatorsResponse;
 }

@@ -5,7 +5,8 @@ import { useAppDispatch } from '../../../redux/hooks';
 import { logout } from '../../../actions/user';
 import styles  from './header.module.scss';
 
-export function Header({children}: {children: React.ReactNode}) {
+export function Header(props: iHeaderProps) {
+  const { children } = props;
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 

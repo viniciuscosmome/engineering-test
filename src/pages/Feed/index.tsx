@@ -1,10 +1,9 @@
 import { useState, useEffect } from 'react';
 
-import type { iPostProps } from '../Post/post';
 import { FormPost, Post } from '../';
 import styles from './feed.module.scss';
 
-const loadPost = (): iPostProps => ({
+const loadPost = (): iPostState => ({
   id: Math.round(Math.random() * Date.now()),
   username: 'random-username',
   title: 'post title',
@@ -13,9 +12,9 @@ const loadPost = (): iPostProps => ({
 });
 
 export function FeedPage() {
-  const [posts, setPosts] = useState<Array<iPostProps>>([loadPost()]);
+  const [posts, setPosts] = useState<Array<iPostState>>([loadPost()]);
 
-  const updatePosts = (newPost: Array<iPostProps>) => {
+  const updatePosts = (newPost: Array<iPostState>) => {
     const newList = [...posts, ...newPost];
     setPosts(newList);
   };

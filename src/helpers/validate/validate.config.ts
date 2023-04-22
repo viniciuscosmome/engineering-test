@@ -1,16 +1,14 @@
-import type { iValidatorsResponse } from './validate';
-
 export const setErrorIsEmpty = (): iValidatorsResponse => ({
-  error: true,
+  error: 'error',
   message: 'This field cannot be empty.',
 });
 
 export const setErrorLength = (detail: string): iValidatorsResponse => ({
-  error: true,
+  error: 'error',
   message: `Out of length. ${detail}`,
 });
 
 export const setError = (): iValidatorsResponse => ({
-  error: true,
+  error: 'warn',
   message: ''
 });

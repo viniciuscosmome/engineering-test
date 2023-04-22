@@ -1,6 +1,5 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, useRef, useState } from 'react';
 
-import type { iInputProps } from './input';
 import styles from './input.module.scss';
 import validators from '../../../helpers/validate';
 
@@ -19,16 +18,27 @@ export function Input(props: iInputProps) {
     minLength,
     maxLength,
   } = props;
+  const inputRef = useRef<HTMLInputElement | null>(null);
   const [message, setMessage] = useState<string>();
   const [inputValue, setInputValue] = useState<string>((value || '') as string);
   const initialValue = value;
 
+  const setNameAtt = (att: string) => {
+    const input = inputRef.current as HTMLInputElement;
+    input.name = att;
+  };
+
   const validateInput = (input: HTMLInputElement): void => {
     setMessage('');
+    setNameAtt(name || '');
 
     const { error, message } = validators.text(input, initialValue as string);
 
-    error && setMessage(message);
+    if (error !== 'none') {
+      setMessage(message);
+      setNameAtt('');
+    }
+
     changeButtonState && changeButtonState(error);
   };
 
@@ -46,8 +56,9 @@ export function Input(props: iInputProps) {
       </div>
 
       <input
+        ref={inputRef}
         type={type}
-        name={name}
+        name={''}
         placeholder={placeholder}
         className={`${styles.input} ${inputClass || ''}`}
         minLength={minLength}

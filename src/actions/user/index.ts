@@ -1,7 +1,6 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 
-import type { iUserState } from './user.types';
 import type { iRootState } from '../../redux/stores';
 
 const initialState: iUserState = {
