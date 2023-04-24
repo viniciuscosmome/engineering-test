@@ -99,9 +99,7 @@ function Post(props: iPostProps) {
           </div>
 
           <div className={styles.content}>
-            <p className={styles.paragraph}>
-              {content}
-            </p>
+            {content.split('\n').map((text, index) => <p key={index} className={styles.paragraph}>{text}</p>)}
           </div>
         </div>
       </article>
