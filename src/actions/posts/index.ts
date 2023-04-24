@@ -19,6 +19,11 @@ export const fetchPostsDataAsync = createAsyncThunk(
   PostsRequest.loadPosts,
 );
 
+export const createPostAsync = createAsyncThunk(
+  'posts/createPost',
+  PostsRequest.createPost,
+);
+
 const postsSlice = createSlice({
   name: 'posts',
   initialState,
@@ -45,6 +50,23 @@ const postsSlice = createSlice({
         }
       })
       .addCase(fetchPostsDataAsync.rejected, (state) => {
+        state.loading = false;
+      });
+    builder
+      .addCase(createPostAsync.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(createPostAsync.fulfilled, (state, { payload }: PayloadAction<iPostProps | void>) => {
+        state.loading = false;
+
+        if (payload) {
+          const oldPosts = state.data.results;
+          const posts = [payload, ...oldPosts];
+
+          state.data = {...state.data, results: posts};
+        }
+      })
+      .addCase(createPostAsync.rejected, (state) => {
         state.loading = false;
       });
   },

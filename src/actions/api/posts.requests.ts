@@ -17,7 +17,22 @@ export const PostsRequest = {
     if (result.status >= 200 && result.status < 300) {
       return result.data;
     }
+  },
+  createPost: async (payload: iApiCreatePost): Promise<iPostProps | void> => {
+    const { username, title, content } = payload;
+    const data = {
+      username,
+      title,
+      content
+    };
+    const [error, result] = await fetcher(api.post('', data));
 
-    return;
+    if (error) {
+      return handleError(error);
+    }
+
+    if (result.status >= 200 && result.status < 300) {
+      return result.data;
+    }
   },
 };

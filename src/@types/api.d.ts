@@ -4,3 +4,5 @@ declare interface iApiPosts {
   previous: string | null;
   results: Array<iPostProps>;
 }
+
+declare type iApiCreatePost = Pick<iPostProps, 'username' | 'title' | 'content'>;
