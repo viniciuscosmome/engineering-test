@@ -1,9 +1,6 @@
 declare interface iPostState {
-  id: number;
-  username: string;
-  title: string;
-  content: string;
-  created_datetime: Date;
+  loading: boolean;
+  data: iApiPosts;
 }
 
 declare interface iUserState {

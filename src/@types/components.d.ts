@@ -18,7 +18,15 @@ declare interface iTextareaProps extends React.TextareaHTMLAttributes<HTMLTextAr
   textareaClass?: string;
 }
 
-declare interface iFormPostProps extends Partial<iPostState> {
+declare interface iPostProps {
+  id: number;
+  username: string;
+  title: string;
+  content: string;
+  created_datetime: string;
+}
+
+declare interface iFormPostProps extends Partial<iPostProps> {
   onCancel?: () => void;
 }
 

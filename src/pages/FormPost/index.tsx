@@ -8,7 +8,7 @@ export function FormPost(props: iFormPostProps) {
   const [disableButtonByTitle, setDisableButtonByTitle] = useState<boolean>(true);
   const [disableButtonByText, setDisableButtonByText] = useState<boolean>(true);
   const {id, title, content, onCancel} = props;
-  const initialData: Partial<iPostState> = {id, title, content};
+  const initialData: Partial<iPostProps> = {id, title, content};
   const isEditMode = !!id;
   const disableButton = isEditMode ? (disableButtonByTitle && disableButtonByText) : (disableButtonByTitle || disableButtonByText);
 
