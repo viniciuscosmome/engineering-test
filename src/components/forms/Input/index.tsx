@@ -1,10 +1,9 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, useState, forwardRef } from 'react';
 
-import type { iInputProps } from './input';
 import styles from './input.module.scss';
 import validators from '../../../helpers/validate';
 
-export function Input(props: iInputProps) {
+export const Input = forwardRef<HTMLInputElement, iInputProps>((props, inputRef) => {
   const {
     changeButtonState,
     label,
@@ -20,22 +19,25 @@ export function Input(props: iInputProps) {
     maxLength,
   } = props;
   const [message, setMessage] = useState<string>();
-  const [inputValue, setInputValue] = useState<string>((value || '') as string);
+  const [inputName, setInputName] = useState<string>((name || '') as string);
   const initialValue = value;
 
   const validateInput = (input: HTMLInputElement): void => {
     setMessage('');
+    setInputName(name || '');
 
     const { error, message } = validators.text(input, initialValue as string);
 
-    error && setMessage(message);
+    if (error !== 'none') {
+      setMessage(message);
+      setInputName('');
+    }
+
     changeButtonState && changeButtonState(error);
   };
 
   const onChange = (event: FormEvent<HTMLInputElement>) => {
     const input = event.target as HTMLInputElement;
-
-    setInputValue(input.value);
     validateInput(input);
   };
 
@@ -46,18 +48,18 @@ export function Input(props: iInputProps) {
       </div>
 
       <input
+        ref={inputRef}
         type={type}
-        name={name}
+        name={inputName}
         placeholder={placeholder}
         className={`${styles.input} ${inputClass || ''}`}
         minLength={minLength}
         maxLength={maxLength}
         required={required}
         onChange={onChange}
-        value={inputValue}
       />
 
       <div className={styles.message} data-display-error={message || ''}></div>
     </label>
   );
-}
+});

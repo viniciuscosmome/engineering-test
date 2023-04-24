@@ -1,7 +1,7 @@
-import { useState, FormEvent } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { login } from '../../actions/user.slice';
+import { login } from '../../actions/user';
 import { useAppDispatch } from '../../redux/hooks';
 
 import { Form, Input } from '../../components/forms';
@@ -13,9 +13,9 @@ export function LoginPage() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const changeButtonState = (disable = false) => setDisableButton(disable);
+  const changeButtonState = (errorStatus = 'error') => setDisableButton(errorStatus === 'error');
 
-  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const onSubmit = (event: iSubmitEvent) => {
     event.preventDefault();
     const form = event.target as HTMLFormElement;
     const formData = Object.fromEntries(new FormData(form));

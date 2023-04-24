@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 
 import { useAppSelector } from '../../redux/hooks';
-import { selectUser } from '../../actions/user.slice';
+import { selectUser } from '../../actions/user';
 import styles from './protectedroute.module.scss';
 
 export function ProtectedRoute() {

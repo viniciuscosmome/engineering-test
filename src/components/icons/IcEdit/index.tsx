@@ -1,5 +1,3 @@
-import type { iIconProps } from '../icon';
-
 export function IcEdit(props: iIconProps) {
   const { size = 30 } = props;
 

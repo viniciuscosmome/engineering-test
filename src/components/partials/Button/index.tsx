@@ -1,4 +1,3 @@
-import type { iButtonProps } from './button';
 import styles from './button.module.scss';
 
 export function Button(props: iButtonProps) {

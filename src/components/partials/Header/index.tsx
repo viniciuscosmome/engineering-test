@@ -2,15 +2,18 @@ import { useNavigate } from 'react-router-dom';
 
 import { IcArrowRight } from '../../icons';
 import { useAppDispatch } from '../../../redux/hooks';
-import { logout } from '../../../actions/user.slice';
+import { logout } from '../../../actions/user';
+import { clearPosts } from '../../../actions/posts';
 import styles  from './header.module.scss';
 
-export function Header({children}: {children: React.ReactNode}) {
+export function Header(props: iHeaderProps) {
+  const { children } = props;
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   const onClick = () => {
     dispatch(logout());
+    dispatch(clearPosts());
     navigate('/');
   };
 

@@ -22,6 +22,8 @@
 
   --border-radius-box: 1rem;
 
+  --shadow: 0 .5rem 1rem rgba(0, 0, 0, .15);
+
   --text:               var(--black-100);
   --background:         var(--white-300);
   --modal-background:   rgba(119, 119, 119, 0.8);
@@ -45,6 +47,16 @@ aside, nav, textarea {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+  background-color: var(--white-200);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--blue-100);
 }
 
 a, button, input, textarea {

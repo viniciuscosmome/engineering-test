@@ -1,4 +1,3 @@
-import type { iConfirmActionProps } from './confirmaction';
 import styles from './confirmaction.module.scss';
 import { Button } from '../Button';
 
