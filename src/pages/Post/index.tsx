@@ -90,12 +90,14 @@ function Post(props: iPostProps) {
         </div>
 
         <div className={styles.body}>
-          <div className={styles.username}>
-            {username}
-          </div>
+          <div className={styles.details}>
+            <div className={styles.username}>
+              {username}
+            </div>
 
-          <div className={styles.timestamp}>
-            {time(created_datetime)}
+            <div className={styles.timestamp}>
+              {time(created_datetime)}
+            </div>
           </div>
 
           <div className={styles.content}>
@@ -134,7 +136,7 @@ export function PostSection() {
 
   return (
     <section className={styles.section}>
-      {postsState.data.results.map((props) => <Post key={props.id} {...props} />)}
+      {postsState.data.results.map((props: iPostProps) => <Post key={props.id} {...props} />)}
 
       <span id={'anchor'} />
 
