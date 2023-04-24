@@ -39,7 +39,7 @@ export function FeedPage() {
         className={`${styles.backToTop} g-button-blue`}
         onClick={onClick}
       >
-        <IcArrowUp />
+        <IcArrowUp size={42} />
       </button>
     </>
   );
