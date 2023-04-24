@@ -49,6 +49,16 @@ aside, nav, textarea {
   }
 }
 
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+  background-color: var(--white-200);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--blue-100);
+}
+
 a, button, input, textarea {
   text-decoration: none;
   background: none;
