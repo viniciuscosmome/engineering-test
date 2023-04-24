@@ -7,6 +7,7 @@ import { ConfirmAction } from '../../components/partials';
 import { useAppSelector, useAppDispatch } from '../../redux/hooks';
 import { selectPosts, fetchDataAsync } from '../../actions/posts';
 import { selectUser } from '../../actions/user';
+import time from '../../helpers/time';
 import styles from './post.module.scss';
 
 function Post(props: iPostProps) {
@@ -89,7 +90,7 @@ function Post(props: iPostProps) {
           </div>
 
           <div className={styles.timestamp}>
-            {String(created_datetime)}
+            {time(created_datetime)}
           </div>
 
           <div className={styles.content}>
