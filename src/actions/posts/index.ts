@@ -14,8 +14,8 @@ const initialState: iPostState = {
   },
 };
 
-export const fetchDataAsync = createAsyncThunk(
-  'posts/fetchData',
+export const fetchPostsDataAsync = createAsyncThunk(
+  'posts/fetchPosts',
   PostsRequest.loadPosts,
 );
 
@@ -30,10 +30,10 @@ const postsSlice = createSlice({
   },
   extraReducers(builder) {
     builder
-      .addCase(fetchDataAsync.pending, (state) => {
+      .addCase(fetchPostsDataAsync.pending, (state) => {
         state.loading = true;
       })
-      .addCase(fetchDataAsync.fulfilled, (state, { payload }: PayloadAction<iApiPosts | void>) => {
+      .addCase(fetchPostsDataAsync.fulfilled, (state, { payload }: PayloadAction<iApiPosts | void>) => {
         state.loading = false;
 
         if (payload) {
@@ -44,7 +44,7 @@ const postsSlice = createSlice({
           state.data = {...payload, results: posts};
         }
       })
-      .addCase(fetchDataAsync.rejected, (state) => {
+      .addCase(fetchPostsDataAsync.rejected, (state) => {
         state.loading = false;
       });
   },

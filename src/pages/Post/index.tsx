@@ -5,7 +5,7 @@ import { ModalWrapper } from '../../components/wrappers';
 import { IcDeleteForever, IcEdit } from '../../components/icons';
 import { ConfirmAction } from '../../components/partials';
 import { useAppSelector, useAppDispatch } from '../../redux/hooks';
-import { selectPosts, fetchDataAsync } from '../../actions/posts';
+import { selectPosts, fetchPostsDataAsync } from '../../actions/posts';
 import { selectUser } from '../../actions/user';
 import time from '../../helpers/time';
 import styles from './post.module.scss';
@@ -113,7 +113,7 @@ export function PostSection() {
 
   useEffect(() => {
     if ((!postsState.loading && morePosts) || !dataPresent) {
-      dispatch(fetchDataAsync(round));
+      dispatch(fetchPostsDataAsync(round));
       setDataPresent(true);
     }
   }, [round]);
