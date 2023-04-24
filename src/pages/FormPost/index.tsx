@@ -2,11 +2,16 @@ import { useState, useRef, useEffect } from 'react';
 
 import { Form, Input, Textarea } from '../../components/forms';
 import { Button } from '../../components/partials';
+import { useAppSelector, useAppDispatch } from '../../redux/hooks';
+import { selectUser } from '../../actions/user';
+import { createPostAsync, updatePostAsync } from '../../actions/posts';
 import styles from './formpost.module.scss';
 
 export function FormPost(props: iFormPostProps) {
   const titleRef = useRef<HTMLInputElement | null>(null);
   const contentRef = useRef<HTMLTextAreaElement | null>(null);
+  const { username } = useAppSelector(selectUser);
+  const dispatch = useAppDispatch();
   const [disableButtonByTitle, setDisableButtonByTitle] = useState<boolean>(true);
   const [disableButtonByText, setDisableButtonByText] = useState<boolean>(true);
   const {id, title, content, onCancel} = props;
@@ -24,10 +29,24 @@ export function FormPost(props: iFormPostProps) {
     const form = event.target as HTMLFormElement;
     const formData = Object.fromEntries(new FormData(form));
 
-    if (initialData.id) {
-      console.log('Edit post', formData);
-    } else {
-      console.log('New post', formData);
+    const newPostProps = {
+      username: username,
+      title: formData.title,
+      content: formData.content,
+    } as Partial<iApiCreatePost>;
+
+    const updatePostProps = {
+      id: id,
+      title: formData.title,
+      content: formData.content,
+    } as Partial<iApiUpdatePost>;
+
+    if (id) {
+      dispatch(updatePostAsync(updatePostProps as iApiUpdatePost));
+      onCancel && onCancel();
+    } else if (username) {
+      dispatch(createPostAsync(newPostProps as iApiCreatePost));
+      form.reset();
     }
   };
 
