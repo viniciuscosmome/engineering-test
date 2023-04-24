@@ -5,12 +5,13 @@ import { ModalWrapper } from '../../components/wrappers';
 import { IcDeleteForever, IcEdit } from '../../components/icons';
 import { ConfirmAction } from '../../components/partials';
 import { useAppSelector, useAppDispatch } from '../../redux/hooks';
-import { selectPosts, fetchPostsDataAsync } from '../../actions/posts';
+import { selectPosts, fetchPostsDataAsync, deletePostAsync } from '../../actions/posts';
 import { selectUser } from '../../actions/user';
 import time from '../../helpers/time';
 import styles from './post.module.scss';
 
 function Post(props: iPostProps) {
+  const dispatch = useAppDispatch();
   const userConnected = useAppSelector(selectUser);
   const [openEditModal, setOpenEditModal] = useState(false);
   const [openConfirmModal, setOpenConfirmModal] = useState(false);
@@ -38,6 +39,10 @@ function Post(props: iPostProps) {
 
   const onConfirmAction = (): void => {
     changeConfirmModalState();
+
+    if (idToDelete !== null && typeof idToDelete === 'number') {
+      dispatch(deletePostAsync({id: idToDelete}));
+    }
   };
 
   return (

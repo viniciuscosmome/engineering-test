@@ -7,3 +7,4 @@ declare interface iApiPosts {
 
 declare type iApiCreatePost = Pick<iPostProps, 'username' | 'title' | 'content'>;
 declare type iApiUpdatePost = Pick<iPostProps, 'id' | 'title' | 'content'>;
+declare type iApiDeletePost = Pick<iPostProps, 'id'>;

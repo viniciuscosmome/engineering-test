@@ -29,6 +29,11 @@ export const updatePostAsync = createAsyncThunk(
   PostsRequest.updatePost,
 );
 
+export const deletePostAsync = createAsyncThunk(
+  'posts/deletePost',
+  PostsRequest.deletePost,
+);
+
 const postsSlice = createSlice({
   name: 'posts',
   initialState,
@@ -88,6 +93,22 @@ const postsSlice = createSlice({
         }
       })
       .addCase(updatePostAsync.rejected, (state) => {
+        state.loading = false;
+      });
+    builder
+      .addCase(deletePostAsync.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(deletePostAsync.fulfilled, (state, { payload }: PayloadAction<iApiDeletePost | void>) => {
+        state.loading = false;
+
+        if (payload) {
+          const posts = state.data.results.filter(oldPost => oldPost.id !== payload.id);
+
+          state.data = {...state.data, results: posts};
+        }
+      })
+      .addCase(deletePostAsync.rejected, (state) => {
         state.loading = false;
       });
   },

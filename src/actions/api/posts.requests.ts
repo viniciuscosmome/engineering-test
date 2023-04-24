@@ -51,4 +51,16 @@ export const PostsRequest = {
       return result.data;
     }
   },
+  deletePost: async (payload: iApiDeletePost): Promise<iApiDeletePost | void> => {
+    const { id } = payload;
+    const [error, result] = await fetcher(api.delete(`/${id}/`));
+
+    if (error) {
+      return handleError(error);
+    }
+
+    if (result.status >= 200 && result.status < 300) {
+      return { id };
+    }
+  },
 };
