@@ -4,3 +4,26 @@
   width: 100%;
   gap: 1.5rem;
 }
+
+.backToTop {
+  pointer-events: none;
+  user-select: none;
+  position: fixed;
+  right: -100%;
+  bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: .5rem;
+  box-shadow: var(--shadow);
+  border-radius: .5rem;
+  opacity: 0;
+  transition-property: background-color, opacity;
+  transition-duration: .2s;
+}
+
+.show {
+  pointer-events: all;
+  right: 1.5rem;
+  opacity: 1;
+}
