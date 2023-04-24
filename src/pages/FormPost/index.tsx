@@ -1,14 +1,15 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 import { Form, Input, Textarea } from '../../components/forms';
 import { Button } from '../../components/partials';
 import styles from './formpost.module.scss';
 
 export function FormPost(props: iFormPostProps) {
+  const titleRef = useRef<HTMLInputElement | null>(null);
+  const contentRef = useRef<HTMLTextAreaElement | null>(null);
   const [disableButtonByTitle, setDisableButtonByTitle] = useState<boolean>(true);
   const [disableButtonByText, setDisableButtonByText] = useState<boolean>(true);
   const {id, title, content, onCancel} = props;
-  const initialData: Partial<iPostProps> = {id, title, content};
   const isEditMode = !!id;
   const disableButton = isEditMode ? (disableButtonByTitle && disableButtonByText) : (disableButtonByTitle || disableButtonByText);
 
@@ -30,28 +31,36 @@ export function FormPost(props: iFormPostProps) {
     }
   };
 
+  useEffect(() => {
+    const titleInput = titleRef.current as HTMLInputElement;
+    titleInput.value = title || '';
+
+    const contentTextarea = contentRef.current as HTMLTextAreaElement;
+    contentTextarea.value = content || '';
+  }, []);
+
   return (
     <Form title={'What\'s on your mind?'} className={styles.form} onSubmit={onSubmit}>
       <Input
-        name={'post_title'}
+        ref={titleRef}
+        name={'title'}
         label={'Title'}
         placeholder={'Hello world'}
         labelClass={styles.label}
         minLength={2}
         maxLength={200}
-        value={title}
         changeButtonState={changeButtonStateByTitle}
         required={true}
       />
 
       <Textarea
-        name={'post_content'}
+        ref={contentRef}
+        name={'content'}
         label={'Content'}
         placeholder={'Content here'}
         labelClass={styles.label}
         minLength={2}
         maxLength={3000}
-        value={content}
         changeButtonState={changeButtonStateByText}
         required={true}
       />

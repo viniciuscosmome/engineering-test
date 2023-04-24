@@ -1,9 +1,9 @@
-import { FormEvent, useRef, useState } from 'react';
+import { FormEvent, useState, forwardRef } from 'react';
 
 import styles from './input.module.scss';
 import validators from '../../../helpers/validate';
 
-export function Input(props: iInputProps) {
+export const Input = forwardRef<HTMLInputElement, iInputProps>((props, inputRef) => {
   const {
     changeButtonState,
     label,
@@ -18,25 +18,19 @@ export function Input(props: iInputProps) {
     minLength,
     maxLength,
   } = props;
-  const inputRef = useRef<HTMLInputElement | null>(null);
   const [message, setMessage] = useState<string>();
-  const [inputValue, setInputValue] = useState<string>((value || '') as string);
+  const [inputName, setInputName] = useState<string>((name || '') as string);
   const initialValue = value;
-
-  const setNameAtt = (att: string) => {
-    const input = inputRef.current as HTMLInputElement;
-    input.name = att;
-  };
 
   const validateInput = (input: HTMLInputElement): void => {
     setMessage('');
-    setNameAtt(name || '');
+    setInputName(name || '');
 
     const { error, message } = validators.text(input, initialValue as string);
 
     if (error !== 'none') {
       setMessage(message);
-      setNameAtt('');
+      setInputName('');
     }
 
     changeButtonState && changeButtonState(error);
@@ -44,8 +38,6 @@ export function Input(props: iInputProps) {
 
   const onChange = (event: FormEvent<HTMLInputElement>) => {
     const input = event.target as HTMLInputElement;
-
-    setInputValue(input.value);
     validateInput(input);
   };
 
@@ -58,17 +50,16 @@ export function Input(props: iInputProps) {
       <input
         ref={inputRef}
         type={type}
-        name={''}
+        name={inputName}
         placeholder={placeholder}
         className={`${styles.input} ${inputClass || ''}`}
         minLength={minLength}
         maxLength={maxLength}
         required={required}
         onChange={onChange}
-        value={inputValue}
       />
 
       <div className={styles.message} data-display-error={message || ''}></div>
     </label>
   );
-}
+});
