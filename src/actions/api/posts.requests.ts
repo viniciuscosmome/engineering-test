@@ -1,8 +1,13 @@
-import { api, fetcher, handleError, postsLimit } from './config';
+import { api, fetcher, handleError } from './config';
+
+const postsLimit = 15;
 
 export const PostsRequest = {
   loadPosts: async (round = 0): Promise<iApiPosts | void> => {
-    const params = { offset: postsLimit * round };
+    const params = {
+      limit: postsLimit,
+      offset: postsLimit * round,
+    };
     const [error, result] = await fetcher(api.get('', { params }));
 
     if (error) {
