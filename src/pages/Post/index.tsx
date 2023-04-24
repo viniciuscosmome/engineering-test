@@ -1,12 +1,16 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { FormPost } from '../';
 import { ModalWrapper } from '../../components/wrappers';
 import { IcDeleteForever, IcEdit } from '../../components/icons';
 import { ConfirmAction } from '../../components/partials';
+import { useAppSelector, useAppDispatch } from '../../redux/hooks';
+import { selectPosts, fetchDataAsync } from '../../actions/posts';
+import { selectUser } from '../../actions/user';
 import styles from './post.module.scss';
 
-export function Post(props: iPostState) {
+function Post(props: iPostProps) {
+  const userConnected = useAppSelector(selectUser);
   const [openEditModal, setOpenEditModal] = useState(false);
   const [openConfirmModal, setOpenConfirmModal] = useState(false);
   const {id, username, title, content, created_datetime} = props;
@@ -58,21 +62,25 @@ export function Post(props: iPostState) {
             {title}
           </h2>
 
-          <button
-            title={'Delete'}
-            className={styles.action}
-            onClick={changeConfirmModalState}
-          >
-            <IcDeleteForever size={'2rem'} />
-          </button>
+          {userConnected.username === username && (
+            <>
+              <button
+                title={'Delete'}
+                className={styles.action}
+                onClick={changeConfirmModalState}
+              >
+                <IcDeleteForever size={'2rem'} />
+              </button>
 
-          <button
-            title={'Edit'}
-            className={styles.action}
-            onClick={changeEditModalState}
-          >
-            <IcEdit size={'2rem'} />
-          </button>
+              <button
+                title={'Edit'}
+                className={styles.action}
+                onClick={changeEditModalState}
+              >
+                <IcEdit size={'2rem'} />
+              </button>
+            </>
+          )}
         </div>
 
         <div className={styles.body}>
@@ -92,5 +100,43 @@ export function Post(props: iPostState) {
         </div>
       </article>
     </>
+  );
+}
+
+export function PostSection() {
+  const [dataPresent, setDataPresent] = useState<boolean>(false);
+  const [round, setRound] = useState<number>(-1);
+  const postsState = useAppSelector(selectPosts);
+  const dispatch = useAppDispatch();
+  const morePosts = !!postsState.data.next;
+
+  useEffect(() => {
+    if ((!postsState.loading && morePosts) || !dataPresent) {
+      dispatch(fetchDataAsync(round));
+      setDataPresent(true);
+    }
+  }, [round]);
+
+  useEffect(() => {
+    const Observer = new IntersectionObserver(entries => {
+      if (entries.some(entry => entry.isIntersecting)) {
+        setRound(round => round + 1);
+      }
+    });
+
+    Observer.observe(document.querySelector('#anchor') as HTMLSpanElement);
+    return () => Observer.disconnect();
+  }, []);
+
+  return (
+    <section className={styles.section}>
+      {postsState.data.results.map((props) => <Post key={props.id} {...props} />)}
+
+      <span id={'anchor'} />
+
+      <span className={`${styles.morePosts} ${morePosts && 'g-anim-loading'}`}>
+        {morePosts ? 'Loading more posts...' : 'No more posts'}
+      </span>
+    </section>
   );
 }

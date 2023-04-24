@@ -2,6 +2,10 @@
   animation: grow .3s .2s both;
 }
 
+.g-anim-loading {
+  animation: loading 2s both infinite;
+}
+
 @keyframes grow {
   0% {
     opacity: 0;
@@ -10,5 +14,14 @@
   100% {
     opacity: 1;
     transform: scale(100%);
+  }
+}
+
+@keyframes loading {
+  0%, 100% {
+    background-color: hsl(228, 0%, 90%);
+  }
+  50% {
+    background-color: hsl(228, 7%, 85%);
   }
 }
