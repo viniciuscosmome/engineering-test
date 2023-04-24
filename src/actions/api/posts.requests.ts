@@ -35,4 +35,20 @@ export const PostsRequest = {
       return result.data;
     }
   },
+  updatePost: async (payload: iApiUpdatePost): Promise<iPostProps | void> => {
+    const { id, title, content } = payload;
+    const data = {
+      title,
+      content
+    };
+    const [error, result] = await fetcher(api.patch(`/${id}/`, data));
+
+    if (error) {
+      return handleError(error);
+    }
+
+    if (result.status >= 200 && result.status < 300) {
+      return result.data;
+    }
+  },
 };
