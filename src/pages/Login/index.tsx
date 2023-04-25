@@ -47,6 +47,7 @@ export function LoginPage() {
       <Checkbox
         name={'remember'}
         label={'Remember me'}
+        labelClass={styles.labelClass}
       />
 
       <Button type={'submit'} fit={'right'} disabled={disableButton}>
