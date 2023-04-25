@@ -1,6 +1,10 @@
 type React = import('react');
 type iChildren = string | React.ReactNode | Array<React.ReactNode>;
 
+declare interface iErrorPageDynamicAccess {
+  [key: string]: Array<string>;
+}
+
 declare interface iFormProps extends React.FormHTMLAttributes<HTMLFormElement> {
   title: string;
   children: iChildren;

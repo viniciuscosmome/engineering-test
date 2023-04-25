@@ -1,0 +1,32 @@
+.container,
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+}
+
+.container {
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1rem;
+  min-height: 100vh;
+  height: 100%;
+}
+
+.title {
+  text-align: center;
+  font-size: 2rem;
+  line-break: loose;
+}
+
+.description {
+  max-width: 100%;
+  width: 660px;
+  font-weight: 400;
+  text-align: center;
+}
+
+.button {
+  padding: .7rem 1.7rem .7rem 1.2rem;
+}
