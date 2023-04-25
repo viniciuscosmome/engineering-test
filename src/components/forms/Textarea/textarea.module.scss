@@ -12,7 +12,6 @@
 .textarea {
   padding: .5rem calc(1rem - 3px);
   width: 100%;
-  min-height: 74px;
   background-color: var(--white-100);
   border: var(--border-gray-100);
   border-radius: .5rem;
@@ -36,5 +35,11 @@
 
   &[data-display-error=""] {
     display: none;
+  }
+}
+
+@media (max-width: 720px) {
+  .textarea {
+    padding: 1rem 1rem;
   }
 }

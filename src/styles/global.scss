@@ -15,6 +15,8 @@
   --red-100:    #FF5151;
   --blue-200:   #547cec;
   --blue-100:   #7695EC;
+  --anim-loading-1: #c2cfd6;
+  --anim-loading-2: #e7ecef;
 
   --border-white-200: 1px solid var(--white-200);
   --border-gray-200:  1px solid var(--gray-200);
@@ -43,6 +45,7 @@ aside, nav, textarea {
     margin: 0;
     padding: 0;
     font-family: 'Roboto', sans-serif;
+    font-size: 16px;
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -57,6 +60,11 @@ aside, nav, textarea {
 
 ::-webkit-scrollbar-thumb {
   background-color: var(--blue-100);
+}
+
+::selection {
+  color: var(--white-100);
+  background-color: var(--blue-200);
 }
 
 a, button, input, textarea {
@@ -91,3 +99,10 @@ body {
 }
 
 @import 'animations';
+
+@media (max-width: 720px) {
+  ::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+  }
+}

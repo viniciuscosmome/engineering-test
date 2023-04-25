@@ -18,3 +18,18 @@
   justify-content: flex-end;
   gap: 1rem;
 }
+
+@media (max-width: 720px) {
+  .submit {
+    width: 100%;
+    padding: 1rem .5rem;
+  }
+
+  .inlineButtons {
+    margin-top: 1rem;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    gap: .5rem;
+  }
+}

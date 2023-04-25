@@ -26,3 +26,9 @@
 .buttonCancel {
   border-color: var(--gray-200);
 }
+
+@media (max-width: 720px) {
+  .button {
+    padding: 1rem 2.5rem;
+  }
+}
