@@ -19,6 +19,11 @@ export const fetchPostsDataAsync = createAsyncThunk(
   PostsRequest.loadPosts,
 );
 
+export const fetchLatesUpdatesAsync = createAsyncThunk(
+  'posts/fetchLatestUpdates',
+  PostsRequest.loadPosts,
+);
+
 export const createPostAsync = createAsyncThunk(
   'posts/createPost',
   PostsRequest.createPost,
@@ -60,6 +65,24 @@ const postsSlice = createSlice({
         }
       })
       .addCase(fetchPostsDataAsync.rejected, (state) => {
+        state.loading = false;
+      });
+    builder
+      .addCase(fetchLatesUpdatesAsync.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(fetchLatesUpdatesAsync.fulfilled, (state, { payload }: PayloadAction<iApiPosts | void>) => {
+        state.loading = false;
+
+        if (payload) {
+          const oldPosts = state.data.results;
+          const newPosts = payload.results.filter(newPost => !oldPosts.some(oldPost => oldPost.id === newPost.id));
+          const posts = [...newPosts, ...oldPosts];
+
+          state.data = {...payload, results: posts};
+        }
+      })
+      .addCase(fetchLatesUpdatesAsync.rejected, (state) => {
         state.loading = false;
       });
     builder
