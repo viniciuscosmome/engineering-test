@@ -4,15 +4,11 @@ import styles from './error.module.scss';
 import { Button } from '../../components/partials';
 import { IcArrowLeft } from '../../components/icons';
 
-interface dynamicAccess {
-  [key: string]: Array<string>;
-}
-
 export function ErrorPage() {
   const navigate = useNavigate();
   let { code } = useParams();
 
-  const messages: dynamicAccess = {
+  const messages: iErrorPageDynamicAccess = {
     '200': ['OK', 'The request has succeeded.'],
     '201': ['Created', 'The request has been fulfilled and a new resource has been created.'],
     '204': ['No Content', 'The server successfully processed the request, but is not returning any content.'],
