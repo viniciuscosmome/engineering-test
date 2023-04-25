@@ -1,0 +1,9 @@
+.label {
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  font-size: small;
+  color: var(--text);
+}
