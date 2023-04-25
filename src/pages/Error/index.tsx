@@ -12,10 +12,6 @@ export function ErrorPage() {
   const navigate = useNavigate();
   let { code } = useParams();
 
-  if (!code) {
-    code = '500';
-  }
-
   const messages: dynamicAccess = {
     '200': ['OK', 'The request has succeeded.'],
     '201': ['Created', 'The request has been fulfilled and a new resource has been created.'],
@@ -30,6 +26,10 @@ export function ErrorPage() {
     '502': ['Bad Gateway', 'The server was acting as a gateway or proxy and received an invalid response from the upstream server.'],
     '503': ['Service Unavailable', 'The server is currently unable to handle the request due to a temporary overload or maintenance of the server.']
   };
+
+  if (!code || !messages[code]) {
+    code = '404';
+  }
 
   const onClick = () => navigate('/feed');
 
