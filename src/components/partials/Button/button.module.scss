@@ -32,3 +32,9 @@
 .uppercase {
   text-transform: uppercase;
 }
+
+@media (max-width: 720px) {
+  .button {
+    padding: 1rem 2rem;
+  }
+}

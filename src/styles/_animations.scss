@@ -3,7 +3,16 @@
 }
 
 .g-anim-loading {
-  animation: loading 2s both infinite;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: .6;
+    border-radius: inherit;
+    animation: loading 2s both infinite alternate;
+  }
 }
 
 @keyframes grow {
@@ -19,9 +28,9 @@
 
 @keyframes loading {
   0%, 100% {
-    background-color: hsl(228, 0%, 90%);
+    background-color: var(--anim-loading-1);
   }
   50% {
-    background-color: hsl(228, 7%, 85%);
+    background-color: var(--anim-loading-2);
   }
 }
