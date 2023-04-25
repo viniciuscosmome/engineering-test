@@ -1,16 +1,22 @@
-import { createBrowserRouter } from 'react-router-dom';
+import { createBrowserRouter, Navigate } from 'react-router-dom';
 
 import { AuthWrapper, AppWrapper } from '../components/wrappers';
-import { ProtectedRoute, FeedPage, LoginPage } from '../pages';
+import { CheckSession, ProtectedRoute, FeedPage, LoginPage, ErrorPage } from '../pages';
 
 const routes = createBrowserRouter([
   {
     path: '/',
-    element: <AuthWrapper />,
+    element: <CheckSession />,
     children: [
       {
         path: '',
-        element: <LoginPage />,
+        element: <AuthWrapper />,
+        children: [
+          {
+            path: '',
+            element: <LoginPage />,
+          }
+        ]
       }
     ]
   },
@@ -31,8 +37,12 @@ const routes = createBrowserRouter([
     ]
   },
   {
+    path: '/e/:code',
+    element: <ErrorPage />,
+  },
+  {
     path: '*',
-    element: 'Error page',
+    element: <Navigate to={'/e/404'} />
   }
 ]);
 

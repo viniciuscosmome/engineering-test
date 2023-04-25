@@ -11,7 +11,6 @@ const fetcher = (promise: AxiosPromise) => promise
   .then((response) => [null, response])
   .catch(({ response }) => [response]);
 
-// ? handle error
 const handleError = (error: AxiosError): void => {
   return console.error('ApiHandleError:', error);
 };

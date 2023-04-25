@@ -15,3 +15,9 @@
 .logout {
   color: var(--white-100);
 }
+
+@media (max-width: 720px) {
+  .header {
+    padding: 1.66rem 1rem;
+  }
+}
