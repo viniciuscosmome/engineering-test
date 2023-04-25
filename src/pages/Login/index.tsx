@@ -20,7 +20,6 @@ export function LoginPage() {
     const form = event.target as HTMLFormElement;
     const formData = Object.fromEntries(new FormData(form));
 
-    // ? handle error
     if (!formData.username) return;
 
     const payload = {
