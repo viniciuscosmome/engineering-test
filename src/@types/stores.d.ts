@@ -5,5 +5,6 @@ declare interface iPostState {
 
 declare interface iUserState {
   isLogged: boolean;
-  username: string | null;
+  remember: boolean;
+  username?: string | null;
 }

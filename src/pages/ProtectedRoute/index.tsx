@@ -10,11 +10,29 @@ export function ProtectedRoute() {
   const { isLogged } = useAppSelector(selectUser);
 
   if (!isLogged) {
-    useEffect(() => navigate('/'));
+    useEffect(() => navigate('/'), []);
 
     return (
       <div className={styles.container}>
         <h2>Unauthorized</h2>
+        <h4 className={styles.loading}>redirecting...</h4>
+      </div>
+    );
+  }
+
+  return <Outlet />;
+}
+
+export function CheckSession() {
+  const navigate = useNavigate();
+  const { isLogged } = useAppSelector(selectUser);
+
+  if (isLogged) {
+    useEffect(() => navigate('/feed'), []);
+
+    return (
+      <div className={styles.container}>
+        <h2>You are already connected</h2>
         <h4 className={styles.loading}>redirecting...</h4>
       </div>
     );

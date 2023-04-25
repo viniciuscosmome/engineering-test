@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { login } from '../../actions/user';
 import { useAppDispatch } from '../../redux/hooks';
 
-import { Form, Input } from '../../components/forms';
+import { Form, Input, Checkbox } from '../../components/forms';
 import { Button } from '../../components/partials';
 import styles from './login.module.scss';
 
@@ -18,12 +18,12 @@ export function LoginPage() {
   const onSubmit = (event: iSubmitEvent) => {
     event.preventDefault();
     const form = event.target as HTMLFormElement;
-    const formData = Object.fromEntries(new FormData(form));
 
-    if (!formData.username) return;
+    if (!form.username) return;
 
-    const payload = {
-      username: formData.username as string,
+    const payload: iUserState = {
+      username: form.username.value as string,
+      remember: form.remember.checked,
       isLogged: true,
     };
 
@@ -42,6 +42,11 @@ export function LoginPage() {
         maxLength={200}
         changeButtonState={changeButtonState}
         required={true}
+      />
+
+      <Checkbox
+        name={'remember'}
+        label={'Remember me'}
       />
 
       <Button type={'submit'} fit={'right'} disabled={disableButton}>
